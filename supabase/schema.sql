@@ -10,7 +10,25 @@ create trigger on_auth_user_created after insert on auth.users for each row exec
 create table public.products (id uuid primary key default gen_random_uuid(), name text not null check (char_length(name) between 2 and 160), slug text unique not null, description text, category_slug text not null check (category_slug in ('sleep','study','power','care','carry','organize')), price integer not null check (price >= 0), compare_at_price integer check (compare_at_price is null or compare_at_price >= price), stock_quantity integer not null default 0 check (stock_quantity >= 0), sku text unique, status product_status not null default 'draft', tags text[] not null default '{}', badge text, image_url text, created_at timestamptz not null default now(), updated_at timestamptz not null default now());
 create table public.bundles (id uuid primary key default gen_random_uuid(), name text not null, slug text unique not null, description text, image_url text, price integer not null check (price >= 0), compare_at_price integer, status product_status not null default 'draft', created_at timestamptz not null default now());
 create table public.bundle_items (bundle_id uuid references public.bundles on delete cascade, product_id uuid references public.products on delete restrict, quantity integer not null default 1 check (quantity > 0), primary key(bundle_id, product_id));
-create table public.orders (id uuid primary key default gen_random_uuid(), user_id uuid references auth.users, razorpay_order_id text unique not null, razorpay_payment_id text unique, receipt text unique not null, customer_name text not null, customer_phone text not null, hostel text not null, room text not null, delivery_note text, subtotal integer not null, discount integer not null default 0, total integer not null, payment_status payment_status not null default 'created', fulfillment_status fulfillment_status not null default 'confirmed', created_at timestamptz not null default now());
+create table public.orders (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid references auth.users,
+  order_access_token text unique,
+  razorpay_order_id text unique not null,
+  razorpay_payment_id text unique,
+  receipt text unique not null,
+  customer_name text not null,
+  customer_phone text not null,
+  hostel text not null,
+  room text not null,
+  delivery_note text,
+  subtotal integer not null,
+  discount integer not null default 0,
+  total integer not null,
+  payment_status payment_status not null default 'created',
+  fulfillment_status fulfillment_status not null default 'confirmed',
+  created_at timestamptz not null default now()
+);
 create table public.order_items (id uuid primary key default gen_random_uuid(), order_id uuid not null references public.orders on delete cascade, product_id uuid references public.products on delete set null, product_name text not null, unit_price integer not null, quantity integer not null check(quantity > 0));
 create table public.inventory_events (id uuid primary key default gen_random_uuid(), product_id uuid not null references public.products, order_id uuid references public.orders, delta integer not null, reason text not null, created_at timestamptz not null default now());
 create table public.webhook_events (id uuid primary key default gen_random_uuid(), provider text not null, event_id text not null, payload jsonb not null, created_at timestamptz not null default now(), unique(provider,event_id));

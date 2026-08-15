@@ -101,7 +101,6 @@ export function CheckoutForm() {
                         }
 
                         setOrderId(data.orderId);
-                        setOrderId(data.orderId);
                         setComplete(true);
                     } catch (verificationError) {
                         console.error(
