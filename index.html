@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Setl — your room, ready before you are</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="logo"><span class="logo-dot"></span>setl</div>
+    <div class="nav-toggle">
+      <a href="index.html" class="active">Store</a>
+      <a href="admin.html">Store manager</a>
+    </div>
+    <button class="cart-btn" id="cart-open">Cart <span class="cart-badge" id="cart-count">0</span></button>
+  </div>
+</div>
+
+<div id="view-store"></div>
+
+<div class="drawer-overlay" id="overlay"></div>
+<div class="drawer" id="drawer"></div>
+<div class="toast" id="toast"></div>
+
+<script src="js/data.js"></script>
+<script src="js/store.js"></script>
+</body>
+</html>

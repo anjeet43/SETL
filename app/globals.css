@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { --ink: #171719; --paper: #f7f6f1; --line: #deddd5; }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; color: var(--ink); background: var(--paper); font-family: Arial, Helvetica, sans-serif; }
+button, input, textarea, select { font: inherit; }
+button { cursor: pointer; }
+.display { font-family: Georgia, 'Times New Roman', serif; letter-spacing: -.055em; }
+.grain { background-image: radial-gradient(rgba(23,23,25,.08) .7px, transparent .7px); background-size: 7px 7px; }
+@media (prefers-reduced-motion: no-preference) { .lift { transition: transform .18s ease, box-shadow .18s ease; } .lift:hover { transform: translateY(-3px); box-shadow: 0 14px 30px rgba(23,23,25,.09); } }
