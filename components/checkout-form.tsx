@@ -224,6 +224,17 @@ export function CheckoutForm() {
                 />
             </label>
 
+            <div className="border border-black/15 bg-[#f7f6f0] p-4">
+                <p className="text-xs font-bold uppercase tracking-[.12em] text-moss">
+                    Before you pay
+                </p>
+
+                <p className="mt-2 text-sm leading-5 text-black/70">
+                    Once an order is placed and payment is completed,
+                    it cannot be cancelled.
+                </p>
+            </div>
+
             <button
                 type="submit"
                 disabled={loading}
