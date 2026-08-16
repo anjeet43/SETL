@@ -56,16 +56,16 @@ export function Header() {
         <Logo />
 
         <nav className="flex items-center gap-1 text-sm font-medium">
-          <Link
+          {/* <Link
             className="rounded-full px-3 py-2 transition-all duration-200 hover:-translate-y-0.5 hover:bg-black/5 active:translate-y-0"
             href="#room"
           >
             Build room
-          </Link>
+          </Link> */}
 
           <Link
             className="rounded-full px-3 py-2 transition-colors hover:bg-black/5"
-            href="#essentials"
+            href="/#essentials"
           >
             Essentials
           </Link>
@@ -76,6 +76,13 @@ export function Header() {
           >
             Orders
           </Link>
+
+          <Link
+  className="rounded-full px-3 py-2 transition-all duration-200 hover:-translate-y-0.5 hover:bg-black/5 active:translate-y-0"
+  href="/track-order"
+>
+  Track order
+</Link>
 
           <Link
             href="/cart"

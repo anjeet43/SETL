@@ -158,6 +158,13 @@ export function CheckoutForm() {
                         View your order
                     </Link>
                 )}
+
+                <Link
+                    href="/track-order"
+                    className="ml-3 inline-block px-5 py-3 text-sm font-bold underline underline-offset-4"
+                >
+                    Track later →
+                </Link>
             </div>
         );
     }
@@ -190,18 +197,14 @@ export function CheckoutForm() {
 
             <div className="grid grid-cols-2 gap-3">
                 <label className="text-xs font-bold">
-                    Hostel
+                    Hostel address
 
-                    <select
+                    <input
                         required
                         name="hostel"
-                        className="mt-1 w-full border border-black/20 bg-white p-3 text-sm"
-                    >
-                        <option value="">Select</option>
-                        <option>Hostel 1</option>
-                        <option>Hostel 2</option>
-                        <option>Other</option>
-                    </select>
+                        placeholder="e.g. HB2, IIIT Manipur"
+                        className="mt-1 w-full border border-black/20 p-3 text-sm"
+                    />
                 </label>
 
                 <label className="text-xs font-bold">
@@ -210,6 +213,7 @@ export function CheckoutForm() {
                     <input
                         required
                         name="room"
+                        placeholder="e.g. 204"
                         className="mt-1 w-full border border-black/20 p-3 text-sm"
                     />
                 </label>
