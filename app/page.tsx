@@ -13,10 +13,10 @@ export default async function Home() { const products = await getProducts(); con
   href="#room"
   className="bg-ink px-5 py-3 text-sm font-bold text-white transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0"
 >
-  Build my room <span aria-hidden>↘</span>
+  Build my room 
 </Link>
     
-    <Link href="#essentials" className="border border-black px-5 py-3 text-sm font-bold">Explore essentials</Link></div></div><aside className="border border-black bg-lemon p-6 md:p-8"><p className="text-xs font-bold uppercase tracking-[.15em]">A two-minute start</p><h2 className="display mt-12 text-4xl leading-none">Welcome to IIITM <span aria-hidden>↗</span></h2><p className="mt-3 text-sm leading-6">What are you setting up?</p>
+    <Link href="#essentials" className="border border-black px-5 py-3 text-sm font-bold">Explore essentials</Link></div></div><aside className="border border-black bg-lemon p-6 md:p-8"><p className="text-xs font-bold uppercase tracking-[.15em]">A two-minute start</p><h2 className="display mt-12 text-4xl leading-none">Welcome to IIITM </h2><p className="mt-3 text-sm leading-6">What are you setting up?</p>
 
 <SetupGuide /></aside></div></section><RoomBuilder products={products}/><section id="essentials" className="mx-auto max-w-6xl px-5 py-16"><div className="flex items-end justify-between"><div><p className="text-xs font-bold uppercase tracking-[.18em] text-moss">Curated by your store manager</p><h2 className="display mt-2 text-5xl">Freshers’ essentials</h2></div><Link className="text-sm font-bold underline" href="/products">See all</Link></div>{featured.length ? <div className="mt-8 grid grid-cols-2 gap-3 md:grid-cols-4">{featured.map(product => <ProductCard key={product.id} product={product}/>)}</div> : <div className="mt-8 border border-dashed border-black/25 bg-white p-10"><h3 className="display text-3xl">The shelves are being set up.</h3><p className="mt-2 max-w-md text-sm leading-6 text-black/60">Products will appear here as soon as the store manager publishes them. There’s no fake catalog behind the scenes.</p></div>}</section></main>
 
