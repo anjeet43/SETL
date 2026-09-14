@@ -2031,4 +2031,8 @@ The platform has been deployed and used in a real campus environment for actual 
 
 <p align="center">
   Built with Next.js • TypeScript • Supabase • PostgreSQL • Razorpay • Vercel
+<<<<<<< HEAD
 </p>
+=======
+</p>
+>>>>>>> d0df6db (Update README and add screenshots)
