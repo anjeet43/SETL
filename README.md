@@ -1843,66 +1843,31 @@ A future production implementation can use a map provider and routing API to cal
 
 ---
 
-# 📸 Screenshots
-
-Add application screenshots to a `screenshots` directory and reference them here.
-
-Recommended screenshots:
-
-```text
-screenshots/
-├── storefront.png
-├── product-page.png
-├── cart.png
-├── checkout.png
-├── order-tracking.png
-├── admin-dashboard.png
-└── live-tracking.png
-```
-
-Example:
+## 📸 Screenshots
 
 ### Storefront
-
-```md
 ![SETL Storefront](./screenshots/storefront.png)
-```
 
 ### Product Page
-
-```md
 ![SETL Product Page](./screenshots/product-page.png)
-```
 
 ### Cart
-
-```md
 ![SETL Cart](./screenshots/cart.png)
-```
 
 ### Checkout
-
-```md
 ![SETL Checkout](./screenshots/checkout.png)
-```
 
 ### Order Tracking
-
-```md
 ![SETL Order Tracking](./screenshots/order-tracking.png)
-```
 
 ### Admin Dashboard
-
-```md
 ![SETL Admin Dashboard](./screenshots/admin-dashboard.png)
-```
 
-### Live Tracking
-
-```md
+### Live Delivery Tracking
 ![SETL Live Tracking](./screenshots/live-tracking.png)
-```
+
+
+
 
 ---
 
