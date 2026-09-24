@@ -1,13 +1,3 @@
-/* ==========================================================
-   Setl — store manager logic (admin.html)
-   Reads/writes only through SetlData (see data.js).
-   In production this page must sit behind real auth + a
-   store_admin/super_admin role check — see setl-schema.sql
-   and setl-production-plan.md section 33. Right now there is
-   no login at all, which is fine for a local prototype and
-   not fine for anything real.
-   ========================================================== */
-
 let products = [];
 let cats = [];
 
