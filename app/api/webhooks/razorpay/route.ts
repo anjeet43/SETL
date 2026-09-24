@@ -15,12 +15,7 @@ function safeCompare(a: string, b: string) {
 
 export async function POST(request: Request) {
   try {
-    // -------------------------------------------------------
-    // 1. Read the RAW webhook body.
-    //
-    // Razorpay signature verification must use the exact
-    // raw request body.
-    // -------------------------------------------------------
+  
 
     const body = await request.text();
 
@@ -43,9 +38,7 @@ export async function POST(request: Request) {
       );
     }
 
-    // -------------------------------------------------------
-    // 2. Verify Razorpay webhook signature.
-    // -------------------------------------------------------
+
 
     const expected =
       crypto
@@ -63,9 +56,7 @@ export async function POST(request: Request) {
       );
     }
 
-    // -------------------------------------------------------
-    // 3. Parse event only AFTER signature verification.
-    // -------------------------------------------------------
+
 
     let event: {
       event?: string;
@@ -90,14 +81,7 @@ export async function POST(request: Request) {
 
     const db = createAdminClient();
 
-    // -------------------------------------------------------
-    // 4. Idempotency
-    //
-    // Razorpay may retry a webhook.
-    //
-    // We store the event before processing it so the same
-    // event cannot be processed twice.
-    // -------------------------------------------------------
+
 
     const eventId =
       request.headers.get(
@@ -137,17 +121,6 @@ export async function POST(request: Request) {
       );
     }
 
-    // -------------------------------------------------------
-    // 5. payment.captured
-    //
-    // IMPORTANT:
-    //
-    // Stock was already reserved during checkout.
-    //
-    // Therefore we DO NOT deduct stock here.
-    //
-    // We only commit the existing reservation.
-    // -------------------------------------------------------
 
     if (
       event.event ===
@@ -193,16 +166,13 @@ export async function POST(request: Request) {
           razorpayOrderId
         );
 
-        // Acknowledge the webhook so Razorpay
-        // doesn't endlessly retry an unknown order.
+       
         return NextResponse.json({
           received: true,
         });
       }
 
-      // Idempotent behavior:
-      // If the browser verification already committed
-      // the reservation, there is nothing more to do.
+     
       if (
         order.payment_status ===
         "paid"
@@ -237,15 +207,7 @@ export async function POST(request: Request) {
       }
     }
 
-    // -------------------------------------------------------
-    // 6. payment.failed
-    //
-    // DO NOT immediately release stock.
-    //
-    // The reservation remains active until its 15-minute
-    // expiry. This protects against cases where a payment
-    // subsequently becomes authorized/captured.
-    // -------------------------------------------------------
+
 
     if (
       event.event ===
@@ -265,11 +227,7 @@ export async function POST(request: Request) {
       }
     }
 
-    // -------------------------------------------------------
-    // 7. Other events
-    //
-    // We acknowledge them without changing the order.
-    // -------------------------------------------------------
+
 
     return NextResponse.json({
       received: true,
