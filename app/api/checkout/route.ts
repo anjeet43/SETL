@@ -13,9 +13,7 @@ const customer = z.object({
 
 export async function POST(request: Request) {
   try {
-    // -------------------------------------------------------
-    // 1. Validate customer details
-    // -------------------------------------------------------
+
 
     const form = await request.formData();
 
@@ -32,9 +30,7 @@ export async function POST(request: Request) {
       );
     }
 
-    // -------------------------------------------------------
-    // 2. Read cart
-    // -------------------------------------------------------
+   
 
     let cart: Record<string, number> = {};
 
@@ -61,13 +57,6 @@ export async function POST(request: Request) {
       );
     }
 
-    // -------------------------------------------------------
-    // 3. Read current active products
-    //
-    // This is only used to calculate the expected amount.
-    // The database reservation function performs the FINAL
-    // stock + price validation atomically.
-    // -------------------------------------------------------
 
     const db = createAdminClient();
 
@@ -132,11 +121,8 @@ export async function POST(request: Request) {
       );
     }
 
-    // -------------------------------------------------------
-    // 4. Create Razorpay order
-    //
-    // The payment order is created server-side.
-    // -------------------------------------------------------
+    // Create Razorpay order
+  -
 
     const receipt = `setl_${crypto
       .randomUUID()
@@ -181,25 +167,6 @@ export async function POST(request: Request) {
 
     // -------------------------------------------------------
     // 5. Create Setl order + RESERVE STOCK atomically
-    //
-    // IMPORTANT:
-    // Do NOT insert orders/order_items manually here.
-    //
-    // The PostgreSQL function:
-    //
-    // create_order_with_stock_reservation()
-    //
-    // performs:
-    // - final price validation
-    // - final stock validation
-    // - row locking
-    // - Setl order creation
-    // - order item creation
-    // - stock reservation
-    // - inventory event creation
-    //
-    // All inside ONE database transaction.
-    // -------------------------------------------------------
 
     const orderAccessToken =
       crypto.randomUUID();
@@ -230,9 +197,9 @@ export async function POST(request: Request) {
         }
       );
 
-    // -------------------------------------------------------
-    // 6. Reservation failed
-    // -------------------------------------------------------
+    
+    // Reservation failed
+    
 
     if (reservationError || !orderId) {
       console.error(
@@ -294,9 +261,9 @@ export async function POST(request: Request) {
       );
     }
 
-    // -------------------------------------------------------
-    // 7. Return Razorpay checkout information
-    // -------------------------------------------------------
+
+    // Return Razorpay checkout information
+
 
     const response =
       NextResponse.json({
