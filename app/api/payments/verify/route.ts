@@ -38,11 +38,7 @@ export async function POST(request: Request) {
 
     const db = createAdminClient();
 
-    // -------------------------------------------------------
-    // 1. Get the order from our own database.
-    //
-    // Never trust the order ID supplied by the browser.
-    // -------------------------------------------------------
+
 
     const { data: order, error: orderError } = await db
       .from("orders")
@@ -59,10 +55,7 @@ export async function POST(request: Request) {
       );
     }
 
-    // -------------------------------------------------------
-    // 2. Make sure the Razorpay order belongs to this
-    //    Setl order.
-    // -------------------------------------------------------
+  -
 
     if (
       order.razorpay_order_id !==
@@ -74,9 +67,7 @@ export async function POST(request: Request) {
       );
     }
 
-    // -------------------------------------------------------
-    // 3. Verify Razorpay signature.
-    // -------------------------------------------------------
+    
 
     const generatedSignature =
       crypto
@@ -109,23 +100,7 @@ export async function POST(request: Request) {
       );
     }
 
-    // -------------------------------------------------------
-    // 4. Commit the existing inventory reservation.
-    //
-    // IMPORTANT:
-    //
-    // Checkout already reserved/decremented stock.
-    //
-    // Therefore we MUST NOT deduct stock again here.
-    //
-    // The database function changes:
-    //
-    // reservation:
-    // active → committed
-    //
-    // order:
-    // created → paid
-    // -------------------------------------------------------
+
 
     const { error: commitError } =
       await db.rpc(
