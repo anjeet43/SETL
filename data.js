@@ -1,13 +1,3 @@
-/* ==========================================================
-   Setl — data layer
-   Everything in this file is the seam between "fake data in the
-   browser" and "real data from a backend". Right now it reads and
-   writes localStorage. To go live, replace the body of each
-   function below with a fetch() call to your API — nothing in
-   store.js or admin.js needs to change, because they only ever
-   call these functions, never touch storage directly.
-   ========================================================== */
-
 const CATS = [
   {id:'sleep', name:'Sleep', ic:'🛏️'},
   {id:'study', name:'Study', ic:'📚'},
@@ -51,8 +41,8 @@ const STORAGE_KEYS = {
 
 const SetlData = {
 
-  // ---- products ----
-  // SWAP FOR LIVE: replace with `return (await fetch('/api/products')).json();`
+  
+  
   async getProducts(){
     const raw = localStorage.getItem(STORAGE_KEYS.products);
     if(raw) return JSON.parse(raw);
@@ -60,15 +50,11 @@ const SetlData = {
     return SEED_PRODUCTS.slice();
   },
 
-  // SWAP FOR LIVE: this whole function becomes a no-op — each admin
-  // action (publish/hide/delete) should instead POST/PATCH/DELETE
-  // straight to your API, and the storefront should re-fetch.
+
   async saveProducts(products){
     localStorage.setItem(STORAGE_KEYS.products, JSON.stringify(products));
   },
 
-  // ---- kits/bundles ----
-  // SWAP FOR LIVE: `return (await fetch('/api/bundles')).json();`
   async getKits(){
     return SEED_KITS.slice();
   },
@@ -79,10 +65,7 @@ const SetlData = {
   },
 
   // ---- cart ----
-  // SWAP FOR LIVE: cart should live server-side once auth exists
-  // (see setl-schema.sql: carts / cart_items), keyed to the signed-in
-  // user, so it survives across devices. Until then this is local
-  // to the browser only.
+
   async getCart(){
     const raw = localStorage.getItem(STORAGE_KEYS.cart);
     return raw ? JSON.parse(raw) : {};
@@ -92,10 +75,7 @@ const SetlData = {
   },
 
   // ---- orders ----
-  // SWAP FOR LIVE: replaced entirely by POST /api/checkout, which
-  // creates a Razorpay order + local `orders` row server-side.
-  // Never trust a client-created "order" as paid — see
-  // setl-production-plan.md section 5.
+
   async placeMockOrder(order){
     const raw = localStorage.getItem(STORAGE_KEYS.orders);
     const orders = raw ? JSON.parse(raw) : [];
